@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Natron Select Safaris</title>
+<link rel="icon" href="WhatsApp Image 2025-03-29 at 09.37.46_c021f032.jpg" type="image/x-icon">
+    <style>
+        /* Updated site colors to match the logo */
+        nav {
+            background-color: #f39c12; /* Orange from the logo */
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px; /* Increased height to fit the logo */
+            padding-left: 120px; /* Add space for the logo */
+        }
+        nav a, .dropdown .dropbtn {
+            display: block;
+            color: white; /* White text for contrast */
+            text-align: center;
+            padding: 20px 20px; /* Adjusted padding for larger header */
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav a:hover, .dropdown .dropbtn:hover {
+            background-color: #e67e22; /* Darker orange for hover effect */
+            color: white;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ecf0f1; /* Light background for dropdown */
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            float: none;
+            color: #f39c12; /* Orange text for dropdown items */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dropdown-content a:hover {
+            background-color: #e67e22; /* Darker orange for hover effect */
+            color: white;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* Styling for the language switcher */
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            gap: 10px;
+        }
+        .language-switcher a {
+            color: white;
+            background-color: #f39c12; /* Orange buttons */
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .language-switcher a:hover {
+            background-color: #e67e22; /* Darker orange for hover effect */
+            color: #ecf0f1;
+        }
+        .dropdown .dropbtn {
+            color: white;
+            background-color: #f39c12; /* Orange from the logo */
+            border: none;
+            text-align: center;
+            padding: 20px 20px; /* Same padding as other menu items */
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dropdown .dropbtn:hover {
+            background-color: #e67e22; /* Darker orange for hover effect */
+            color: white;
+        }
+        /* Styling for the logo */
+        .logo-container {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            text-align: center;
+        }
+        .logo-container img {
+            height: 80px; /* Ensure the logo fits within the header */
+            width: auto;
+        }
+        .logo-container p {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #f39c12;
+            margin: 5px 0 0;
+        }
+        .logo {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #f39c12;
+            text-decoration: none;
+        }
+        .logo:hover {
+            color: #e67e22;
+        }
+        /* Styling for the footer */
+        footer {
+            background-color: #f39c12; /* Orange footer */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: auto; /* Push the footer to the bottom */
+        }
+        footer a {
+            color: white; /* White links in footer */
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #ecf0f1; /* Light hover effect for footer links */
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .slideshow {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+        .slideshow img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .slideshow img.active {
+            opacity: 1;
+        }
+        .hero {
+            background-color: #f39c12; /* Orange background for hero section */
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .hero p {
+            font-size: 20px;
+            margin: 10px 0 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        .hero .cta-buttons a {
+            background-color: white; /* White buttons */
+            color: #f39c12; /* Orange text */
+            text-decoration: none;
+            padding: 12px 24px;
+            margin: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .hero .cta-buttons a:hover {
+            background-color: #e67e22; /* Darker orange for hover effect */
+            color: white;
+            transform: scale(1.05);
+        }
+        .content-section {
+            padding: 40px 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .content-section h2 {
+            font-size: 32px;
+            color: #f39c12; /* Orange headings */
+            margin-bottom: 20px;
+        }
+        .content-section p {
+            font-size: 18px;
+            color: #2c3e50; /* Darker text for readability */
+            line-height: 1.6;
+        }
+        #home {
+            background-color: #f39c12; /* Orange for the hero section */
+            color: white;
+        }
+        #about-us {
+            background-color: #ecf0f1; /* Light gray for About Us */
+            color: #2c3e50;
+        }
+        #destinations {
+            background: linear-gradient(to right, #e74c3c, #f39c12); /* Gradient from red to orange */
+            color: #ffffff; /* White text for better contrast */
+            padding: 40px 20px; /* Add padding for spacing */
+            border-radius: 8px; /* Add rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+        }
+        #destinations h2 {
+            font-size: 36px; /* Larger font size for the heading */
+            color: #ffffff; /* White heading text */
+            margin-bottom: 20px;
+            text-align: center; /* Center-align the heading */
+        }
+        #destinations p {
+            font-size: 18px; /* Slightly larger font for readability */
+            color: #ecf0f1; /* Light gray text for better readability */
+            line-height: 1.8; /* Increase line height for better spacing */
+            text-align: justify; /* Justify text for a clean look */
+        }
+        #destinations h3 {
+            font-size: 24px; /* Larger font size for subheadings */
+            color: #ffffff; /* White subheading text */
+            margin-top: 20px;
+        }
+        #day-trips, #luxury-safaris, #budget-safaris, #tailor-made-tours {
+            background-color: #f7f7f7; /* Light neutral for Safari Descriptions */
+            color: #2c3e50;
+        }
+        #honeymoon-packages, #family-packages, #adventure-packages, #group-packages {
+            background-color: #dff9fb; /* Light blue for Packages */
+            color: #130f40;
+            display: inline-block; /* Arrange horizontally */
+            width: 23%; /* Adjust width for horizontal alignment */
+            margin: 1%; /* Add spacing between packages */
+            vertical-align: top; /* Align packages at the top */
+            text-align: center; /* Center-align text */
+            padding: 20px; /* Add padding for better appearance */
+            border-radius: 8px; /* Add rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+        }
+        #packages-container {
+            display: flex; /* Use flexbox for horizontal layout */
+            flex-wrap: wrap; /* Allow wrapping if needed */
+            justify-content: space-between; /* Add spacing between packages */
+        }
+        #contact-us {
+            background-color: #badc58; /* Light green for Contact Us */
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+<div class="logo-container">
+<a href="index.html" class="logo">
+        <img src="WhatsApp Image 2025-03-29 at 09.37.46_c021f032.jpg" alt="Natron Safaris Logo">
+</a>
+<p>"Your Gateway to Unforgettable Adventures"</p>
+    </div>
+<div class="language-switcher">
+        <a href="?lang=en">English</a> | <a href="?lang=fr">Français</a>
+    </div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about-us">About Us</a>
+        <div class="dropdown">
+            <button class="dropbtn">Safaris/Tours 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <!-- Links to Safari/Tour categories -->
+                <a href="#day-trips">Day Trips</a>
+                <a href="#luxury-safaris">Luxury Safaris</a>
+                <a href="#budget-safaris">Budget Safaris</a>
+                <a href="#tailor-made-tours">Tailor-made Tours</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Packages 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#honeymoon-packages">Honeymoon Packages</a>
+                <a href="#family-packages">Family Packages</a>
+                <a href="#adventure-packages">Adventure Packages</a>
+                <a href="#group-packages">Group Packages</a>
+            </div>
+        </div>
+        <a href="#destinations">Destinations</a>
+        <a href="#contact-us">Contact</a>
+    </nav>
+<div class="slideshow">
+        <img src="hu-chen-BRXn1JtdXtc-unsplash.jpg" alt="Slide 1" class="active">
+        <img src="WhatsApp Image 2025-03-29 at 09.37.46_c021f032.jpg" alt="Slide 2">
+        <img src="IMG-20250316-WA0053.jpg" alt="Slide 3">
+    </div>
+    <!-- Home section -->
+    <div id="home" class="hero">
+        <h1>Welcome to Natron Select Safaris</h1>
+        <p>Embark on the adventure of a lifetime with our expertly tailored safari packages.</p>
+        <div class="cta-buttons">
+            <a href="#honeymoon-packages">Explore Safaris</a>
+            <a href="#contact-us">Contact Us</a>
+        </div>
+    </div>
+    <!-- Additional Home Information -->
+    <div class="content-section">
+        <h2>Our Services</h2>
+        <p>
+            At Natron Select Safaris, we specialize in crafting unforgettable safari experiences. Whether you seek luxury safaris, 
+            budget-friendly options, or tailor-made tours, we have something for everyone. Our expert guides ensure your journey 
+            is safe, comfortable, and filled with breathtaking moments.
+        </p>
+        <h2>Our Values</h2>
+        <p>
+            We are committed to sustainability, community engagement, and exceptional customer service. Our mission is to connect 
+            travelers with Africa's beauty while preserving its natural and cultural heritage for future generations.
+        </p>
+    </div>
+    <div class="content-section">
+        <h2>Why Choose Us?</h2>
+        <p>
+            At Natron Select Safaris, we offer unforgettable safari experiences that connect you with the beauty of nature. 
+            From luxury safaris to budget-friendly options, we have something for everyone.
+        </p>
+    </div><!-- About Us section moved here -->
+    <div id="about-us" class="content-section">
+        <h2>About Us</h2>
+        <p>
+            Natron Select Safaris is dedicated to providing exceptional safari experiences. Our mission is to connect travelers 
+            with the wonders of nature while ensuring comfort, safety, and unforgettable memories. With years of expertise, 
+            we pride ourselves on offering personalized tours that cater to every adventurer's needs.
+        </p>
+    </div>
+    <!-- Destinations Section -->
+    <div id="destinations" class="content-section">
+        <h2>Explore Our Destinations</h2>
+        <p>
+            Tanzania is a land of breathtaking beauty and diverse landscapes. From the iconic Serengeti to the serene Lake Natron, 
+            our destinations offer something for every traveler. Discover the wonders of Tanzania with Natron Select Safaris.
+        </p>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto; font-size: 18px; line-height: 1.8;">
+            <h3>Serengeti National Park</h3>
+            <p>
+                Known for the Great Migration, the Serengeti offers unparalleled wildlife viewing opportunities. Spot the Big Five 
+                and enjoy the vast, open savannah landscapes.
+            </p>
+            <h3>Ngorongoro Crater</h3>
+            <p>
+                A UNESCO World Heritage Site, the Ngorongoro Crater is home to a dense population of wildlife, including lions, 
+                elephants, and the critically endangered black rhino.
+            </p>
+            <h3>Lake Manyara</h3>
+            <p>
+                Famous for its tree-climbing lions and large flocks of flamingos, Lake Manyara National Park offers diverse ecosystems 
+                and a perfect destination for a day trip.
+            </p>
+            <h3>Tarangire National Park</h3>
+            <p>
+                Known for its large elephant herds and iconic baobab trees, Tarangire provides a serene and intimate safari experience.
+            </p>
+            <h3>Lake Natron</h3>
+            <p>
+                A unique destination with alkaline waters and vibrant red hues, Lake Natron is a breeding ground for flamingos and 
+                a haven for birdwatchers and photographers.
+            </p>
+            <h3>Southern Tourist Circuit</h3>
+            <p>
+                Explore the untouched wilderness of Selous Game Reserve, Ruaha National Park, and Mikumi National Park for a more 
+                off-the-beaten-path experience.
+            </p>
+            <h3>Cultural Experiences</h3>
+            <p>
+                Immerse yourself in the lives of the Maasai, Hadzabe, and Datoga tribes. Participate in cultural dances and learn 
+                about traditional hunting techniques.
+            </p>
+            <h3>Mountain Hiking</h3>
+            <p>
+                Climb Mount Kilimanjaro, Africa's highest peak, or explore the scenic trails of Mount Meru and the Usambara Mountains 
+                for breathtaking views and adventure.
+            </p>
+        </div>
+    </div>
+    <!-- Safari/Tour Descriptions -->
+    <div id="day-trips" class="content-section">
+        <h2>Safari Descriptions</h2>
+        <h2>Day Trips</h2>
+        <p>
+            Perfect for travelers with limited time, our day trips offer a quick yet immersive experience of Tanzania's natural beauty. 
+            Explore nearby parks, cultural sites, and scenic landscapes in a single day.
+        </p>
+    </div>
+    <div class="content-section" id="luxury-safaris">
+        <h2>Luxury Safaris</h2>
+        <p>
+            Experience Tanzania in style with our luxury safaris. Enjoy premium accommodations, personalized services, and exclusive 
+            access to breathtaking locations.
+        </p>
+    </div>
+    <div class="content-section" id="budget-safaris">
+        <h2>Budget Safaris</h2>
+        <p>
+            Discover Tanzania's wonders without breaking the bank. Our budget safaris provide affordable options while ensuring 
+            a memorable and comfortable adventure.
+        </p>
+    </div>
+    <div class="content-section" id="tailor-made-tours">
+        <h2>Tailor-made Tours</h2>
+        <p>
+            Customize your safari experience to suit your preferences. Whether it's a specific destination, activity, or duration, 
+            our tailor-made tours are designed to meet your unique needs.
+        </p>
+    </div>
+    <!-- Packages Section -->
+    <div id="packages-container">
+        <h2>Our Packages</h2> <!-- Added title for the packages section -->
+        <div id="honeymoon-packages" class="content-section">
+            <h2>Honeymoon Packages</h2>
+            <p>Enjoy a romantic getaway with our specially curated honeymoon packages.</p>
+        </div>
+        <div id="family-packages" class="content-section">
+            <h2>Family Packages</h2>
+            <p>Create unforgettable memories with your loved ones on our family-friendly safaris.</p>
+        </div>
+        <div id="adventure-packages" class="content-section">
+            <h2>Adventure Packages</h2>
+            <p>For thrill-seekers, our adventure packages offer exciting and adrenaline-filled experiences.</p>
+        </div>
+        <div id="group-packages" class="content-section">
+            <h2>Group Packages</h2>
+            <p>Travel with friends or colleagues and enjoy exclusive group discounts and experiences.</p>
+        </div>
+    </div>
+    <!-- Contact Us Section -->
+    <div id="contact-us" class="content-section">
+        <h2>Contact Us</h2>
+        <p>
+            We would love to hear from you! Whether you have questions about our safari packages, need help planning your trip, 
+            or want to share your feedback, feel free to reach out to us.
+        </p>
+        <p><strong>Email:</strong> info@natronselectsafaris.com</p>
+        <p><strong>Phone:</strong> +255 784831095</p>
+        <p><strong>Address:</strong> Arusha, Tanzania</p>
+        <p>
+            Connect with us on social media:
+            <a href="https://www.facebook.com" target="_blank">Facebook</a>, 
+            <a href="https://www.twitter.com" target="_blank">Twitter</a>, 
+            <a href="https://www.instagram.com" target="_blank">Instagram</a>
+        </p>
+        <p>
+            Or use the form below to send us a message directly:
+        </p>
+        <form action="submit-contact-form.html" method="post" style="max-width: 600px; margin: 0 auto; text-align: left;">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 8px; margin-bottom: 10px;"></textarea><br>
+            <button type="submit" style="background-color: #f39c12; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Send Message</button>
+        </form>
+    </div>
+<footer>
+        <p>&copy; 2025 Natron Select Safaris by Lomelock. All Rights Reserved.</p>
+        <p>
+            <a href="privacy-policy.html">Privacy Policy</a> | 
+            <a href="terms-of-service.html">Terms of Service</a>
+        </p>
+<p>
+            <a href="https://www.facebook.com" target="_blank">Facebook</a> | 
+            <a href="https://www.twitter.com" target="_blank">Twitter</a> | 
+            <a href="https://www.instagram.com" target="_blank">Instagram</a>
+        </p>
+    </footer>
+<script>
+        const slides = document.querySelectorAll('.slideshow img');
+        let currentSlide = 0;
+
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000); // Change slide every 5 seconds
+    </script>
+</body>
+</html>
